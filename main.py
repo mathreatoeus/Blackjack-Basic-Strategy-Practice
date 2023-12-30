@@ -1,3 +1,7 @@
+# Author: Matheus Reato
+# Campinas, São Paulo, Brazil
+# December 2023
+
 from random import randint
 from time import sleep
 from colorama import Fore
