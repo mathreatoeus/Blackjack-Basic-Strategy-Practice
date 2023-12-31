@@ -70,12 +70,19 @@ while True:
 
     # Initializing simulation
     print(f'{Fore.LIGHTBLUE_EX}---------- MENU ----------{Fore.WHITE}')
-    print('Welcome!!! Chose a game mode:')
+    print('Welcome!!! Chose a practice mode:')
+    sleep(1)
     print('1 - Practice pair splitting')
+    sleep(0.2)
     print('2 - Practice soft totals')
+    sleep(0.2)
     print('3 - Practice hard totals')
+    sleep(0.2)
     print('4 - Practice all')
-    print('5 - Quit')
+    sleep(0.2)
+    print('5 - Practice pair splitting & soft totals')
+    sleep(0.2)
+    print('6 - Quit')
 
     option = int(input('> '))
 
@@ -87,7 +94,7 @@ while True:
             print('Drafting cards...')
             sleep(0.2)
 
-            player_selection = randint(1, 10)
+            player_selection = randint(1, 10)    # Adjust these to select which rows to play
             dealer_selection = randint(1, 10)
 
             player_cards = pair_splitting_table[player_selection][0]
@@ -138,7 +145,7 @@ while True:
             print('Drafting cards...')
             sleep(0.2)
 
-            player_selection = randint(1, 8)
+            player_selection = randint(1, 4)    # Adjust these to select which rows to play
             dealer_selection = randint(1, 10)
 
             player_cards = soft_totals[player_selection][0]
@@ -189,7 +196,7 @@ while True:
             print('Drafting cards...')
             sleep(0.2)
 
-            player_selection = randint(1, 10)
+            player_selection = randint(1, 10)    # Adjust these to select which rowsto play
             dealer_selection = randint(1, 10)
 
             player_cards = hard_totals[player_selection][0]
@@ -244,7 +251,7 @@ while True:
 
             # Pair splitting ----------------------------------------
             if table_selection == 1:
-                player_selection = randint(1, 10)
+                player_selection = randint(1, 10)    # Adjust these to select which rows to play
                 dealer_selection = randint(1, 10)
 
                 player_cards = pair_splitting_table[player_selection][0]
@@ -289,7 +296,7 @@ while True:
             
             # Soft Totals -------------------------------------------
             elif table_selection == 2:
-                player_selection = randint(1, 8)
+                player_selection = randint(1, 8)    # Adjust these to select which rows to play
                 dealer_selection = randint(1, 10)
 
                 player_cards = soft_totals[player_selection][0]
@@ -334,7 +341,7 @@ while True:
 
             # Hard Totals -------------------------------------------
             else:
-                player_selection = randint(1, 10)
+                player_selection = randint(1, 10)    # Adjust these to select which ros to play 
                 dealer_selection = randint(1, 10)
 
                 player_cards = hard_totals[player_selection][0]
@@ -376,8 +383,108 @@ while True:
                     losses = losses + 1
                     accuracy = wins/total_rounds
                     sleep(0.2)
-    
+
+    # Pair Splitting & Soft Totals -----------------------------------------------------
     elif option == 5:
+        while True:
+            table_selection = randint(1, 2)
+
+            print(f'{Fore.LIGHTGREEN_EX}---------- NEW ROUND ----------{Fore.WHITE}')
+            sleep(0.2)
+            print('Drafting cards...')
+            sleep(0.2)
+
+            # Pair splitting -------------------------------------
+            if table_selection == 1:
+                player_selection = randint(1, 10)    # Adjust these to select which rows to play
+                dealer_selection = randint(1, 10)
+
+                player_cards = pair_splitting_table[player_selection][0]
+                dealer_upcard = pair_splitting_table[0][dealer_selection]
+
+                print("Player's cards: ", player_cards)
+                sleep(0.2)
+                print("Dealer's upcard: ", dealer_upcard)
+                sleep(0.2)
+
+                response = str(input('Action: ')).upper().rstrip()
+
+                if response == pair_splitting_table[player_selection][dealer_selection]:
+                    print(f'{Fore.GREEN}Correct!{Fore.WHITE}')
+                    total_rounds = total_rounds + 1
+                    wins = wins + 1
+                    accuracy = wins / total_rounds
+                    sleep(0.2)
+
+                elif response == 'QUIT':
+                    print('Printing stats...')
+                    sleep(1)
+                    print(f'{Fore.LIGHTMAGENTA_EX}---------- STATISTICS ----------{Fore.WHITE}')
+                    print('Total rounds: ', total_rounds)
+                    sleep(0.5)
+                    print(f'{Fore.LIGHTGREEN_EX}Wins: {Fore.WHITE}', wins)
+                    sleep(0.5)
+                    print(f'{Fore.LIGHTRED_EX}Losses: {Fore.WHITE}', losses)
+                    sleep(0.5)
+                    print('Accuracy: {:.2f}'.format(accuracy))
+                    sleep(1.5)
+                    print('Ending simulation...')
+                    sleep(1.5)
+                    break
+
+                else:
+                    print(f'{Fore.RED}Incorrect...{Fore.WHITE}')
+                    total_rounds = total_rounds + 1
+                    losses = losses + 1
+                    accuracy = wins/total_rounds
+                    sleep(0.2)
+
+            # Soft totals --------------------------------
+            else:
+                player_selection = randint(1, 4)   # Adjust these to select which rows to play
+                dealer_selection = randint(1, 10)
+
+                player_cards = soft_totals[player_selection][0]
+                dealer_upcard = soft_totals[0][dealer_selection]
+
+                print("Player's cards: ", player_cards)
+                sleep(0.2)
+                print("Dealer's upcard: ", dealer_upcard)
+                sleep(0.2)
+
+                response = str(input('Action: ')).upper().rstrip()
+
+                if response == soft_totals[player_selection][dealer_selection]:
+                    print(f'{Fore.GREEN}Correct!{Fore.WHITE}')
+                    total_rounds = total_rounds + 1
+                    wins = wins + 1
+                    accuracy = wins / total_rounds
+                    sleep(0.2)
+
+                elif response == 'QUIT':
+                    print('Printing stats...')
+                    sleep(1)
+                    print(f'{Fore.LIGHTMAGENTA_EX}---------- STATISTICS ----------{Fore.WHITE}')
+                    print('Total rounds: ', total_rounds)
+                    sleep(0.5)
+                    print(f'{Fore.LIGHTGREEN_EX}Wins: {Fore.WHITE}', wins)
+                    sleep(0.5)
+                    print(f'{Fore.LIGHTRED_EX}Losses: {Fore.WHITE}', losses)
+                    sleep(0.5)
+                    print('Accuracy: {:.2f}'.format(accuracy))
+                    sleep(1.5)
+                    print('Ending simulation...')
+                    sleep(1.5)
+                    break
+
+                else:
+                    print(f'{Fore.RED}Incorrect...{Fore.WHITE}')
+                    total_rounds = total_rounds + 1
+                    losses = losses + 1
+                    accuracy = wins/total_rounds
+                    sleep(0.2)
+    
+    elif option == 6:
         print(f'{Fore.LIGHTMAGENTA_EX}Thanks for playing!{Fore.WHITE}')
         sleep(1)
 
@@ -393,7 +500,7 @@ while True:
 
     else:
         print(f'{Fore.RED}Please select a valid option{Fore.WHITE}')
-        sleep(0.2)
+        sleep(0.5)
 
 
 
